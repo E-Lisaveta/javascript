@@ -1,74 +1,56 @@
 'use strict'
 
 //1
-let count=77;
-if (count<=100&&count>=90) console.log("Отлично");
-else if (count<=89&&count>=60) console.log("Хорошо");
-else if (count<=59&&count>=40) console.log("Удовдетворительно");
-else if(count<=39&&count>=0) console.log("попробуй потом");
+function getEnding(count){
+    let ending;
+    if (count>=11&&count<=19) return ending="товаров";
+    if (count%10>1&&count%10<5) return ending="товара";
+    if (count%10==1) return ending="товар";
+    return ending="товаров"
+}
+let num=81;
+console.log(num+' '+getEnding(num));
 
 //2
-let a=parseInt(prompt("Первый операнд:"));
-let b=parseInt(prompt("Второй операнд:"));
-let c=parseInt(prompt("Оператор:"));
-switch(c){
-    case 3: console.log(a+b);
-    break;
-    case 5: console.log(a-b);
-    break;
-    case 7: console.log(a*b);
-    break;
-    case 9: console.log(a/b);
-    break;
+function range (start, end, step=1){
+    let newArr=[];
+    let count=0;
+    for(let i=start;i<=end;i+=step){
+        newArr[count]=i;
+        count+=1;
+    }
+    return newArr;
 }
+console.log(range(1,10,2));
 
 //3
-let rand=(Math.random()*490+1)+10;
-if(rand>25&&rand<200) console.log(`Число ${rand} содержится в интервале (25; 200)`);
-else console.log(`Число ${rand} не содержится в интервале (25; 200)`);
+function spam(text,...words){
+    let arrText=text.split(' ');
+    let sum=0;
+    for(let i=0;i<arrText.length;i++){
+        for(let j=0;j<words.length;j++){
+            if(arrText[i]==words[j]) sum+=1;
+        }
+    }
+    if (sum==0) return "0 баллов";
+    if (sum>=1&&sum<=3) return "1 балл";
+    if (sum>=4&&sum<=6) return "2 балла";
+    if (sum>=7&&sum<=9) return "3 балла";
+    if (sum>=10&&sum<=14) return "4 балла";
+    if (sum>14) return "5 баллов";
+}
+let text="рыбак рыбалка зонт рыбака видит рыбалка цепь из далека";
+console.log("Данный текст заспамлен на "+spam(text,"рыбалка", "цепь", "зонт"));
 
 //4
-for (let i=1;i<=20;i++){
-    let res=i*2;
-    console.log(res);
-}
+let numsArr = [
+    [3, 5, -1, 6, 0],
+    [56, -9, 111, 6],
+    [11, 86, -12],
+];
 
-//5
-let one = 0, two=1, fib;
-let n=10;
-for (let i=0; i<=n; i++){
-    console.log(one);
-    fib=one+two;
-    one=two;
-    two=fib;
-}
+let newArr1= numsArr.map(elem=>elem.map(num=>num*=10));
+console.log(newArr1);
 
-//6
-let n=2;
-for (let i=1;i<=n;i++){
-    for(let j=0;j<=9;j++){
-        console.log(`${i}*${j}=${i*j}`)
-    }
-}
-
-//7
-
-let userNum=parseInt(prompt("Загадайте число от 1 до 100 : "));
-let left=0, right=100;
-let mb=(left+right)/2;
-while(true){
-    let ans=parseInt(prompt(`Число = ${mb}?`));
-    if (ans===1){ 
-        console.log(`Вы загадали число ${mb}`);
-        break;
-    }
-    else ans=parseInt(prompt(`Число меньше ${mb}?`));
-    if (ans===1)
-        right=mb;
-    else 
-        left=mb;
-    mb=(left+right)/2;
-    
-}
-
-
+let newArr2= numsArr.map(elem=>elem.filter(num=>num>0));
+console.log(newArr2);
